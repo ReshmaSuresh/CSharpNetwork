@@ -30,7 +30,7 @@ namespace ConsoleApp1
                 Console.WriteLine("Data receieved " + data);
 
                 client.Send(buff);
-                if(data == "x")
+                if(data == "x") 
                 {
                     break;
                 }
