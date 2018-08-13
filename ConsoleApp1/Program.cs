@@ -17,7 +17,29 @@ namespace ConsoleApp1
             IPEndPoint ipEnd = new IPEndPoint(ipaddr, 23000);
             socket.Bind(ipEnd);
             socket.Listen(5);
-            socket.Accept();
+            Socket client = socket.Accept();
+            if(client != null)
+            {
+                Console.Write("Connected to " + client.ToString() + " IPEndpoint "  + client.RemoteEndPoint.ToString());
+            }
+            while (true)
+            {
+                byte[] buff = new byte[128];
+                int receivedData = client.Receive(buff);
+                string data = Encoding.ASCII.GetString(buff);
+                Console.WriteLine("Data receieved " + data);
+
+                client.Send(buff);
+                if(data == "x")
+                {
+                    break;
+                }
+
+                Array.Clear(buff, 0, buff.Length);
+
+
+            }
+
            
            
 
